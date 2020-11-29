@@ -233,7 +233,7 @@ def show():
        
    total=0
    totItems=0
-   display=1
+   display=0
    shopLen = len(shoppingCart)
    for i in range(shopLen):
         total += shoppingCart[i]["subTotal"]
