@@ -66,7 +66,7 @@ function validate ( )
 
 
 
-    if ( USERNAME.val() && USERNAME.val() != USERNAME.val().toLowerCase())
+    if (  USERNAME.val() != USERNAME.val().toLowerCase())
     {
         USERNAME_MSG.html("Username must be all lowercase");
         USERNAME_MSG.show();
@@ -80,7 +80,7 @@ function validate ( )
         valid = false;
     }
 
-    if ( PASSWORD.val()!=None && !CONFIRM.val() || PASSWORD.val() != CONFIRM.val() )
+    if ( !CONFIRM.val() || PASSWORD.val() != CONFIRM.val() )
     {
         CONFIRM_MSG.html("Passwords don't match");
         CONFIRM_MSG.show();
