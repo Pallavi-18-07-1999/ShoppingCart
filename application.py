@@ -12,7 +12,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem" 
 Session(app)
 
-# Creates a connection to the database
+
 client = pymongo.MongoClient("mongodb://localhost:27017/")
 db=client["testDB"]
 collection=db["shirts12"]   
@@ -274,25 +274,12 @@ def registration():
     return render_template ( "login.html" )
 
 
-@app.route("/cart/")
-def cart():
-    if 'user' in session:
-        # Clear shopping cart variables
-        totItems, total, display = 0, 0, 0
-        # Grab info currently in database
-        shoppingCart = db.execute("SELECT team, image, SUM(qty), SUM(subTotal), price, id FROM cart GROUP BY team")
-        # Get variable values
-        shopLen = len(shoppingCart)
-        for i in range(shopLen):
-            total += shoppingCart[i]["SUM(subTotal)"]
-            totItems += shoppingCart[i]["SUM(qty)"]
-    # Render shopping cart
-    return render_template("cart.html", shoppingCart=shoppingCart, shopLen=shopLen, total=total, totItems=totItems, display=display, session=session)
 
 
 
 
 
-# Only needed if Flask run is not used to execute the server
+
+
 if __name__ == "__main__":
     app.run(debug=True)
