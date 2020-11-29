@@ -121,8 +121,7 @@ def update():
         subTotal = qty * price
         # Insert selected shirt into shopping cart
         cart_collection.insert_one({"id":id,"team":team,"price":price,"subTotal":subTotal,"image":image,"qty":qty})
-        #db.execute("INSERT INTO cart (id, qty, team, image, price, subTotal) VALUES (:id, :qty, :team, :image, :price, :subTotal)", id=id, qty=qty, team=team, image=image, price=price, subTotal=subTotal)
-        #shoppingCart = db.execute("SELECT team, image, SUM(qty), SUM(subTotal), price, id FROM cart GROUP BY team")
+        
         shoppingCart = list(cart_collection.aggregate([{"$group":{"_id":"$team","image":{"$first":"$image"},"price":{"$first":"$price"},"id":{"$first":"$id"},"quantity":{"$sum":"$qty"},"subTotal":{"$sum":"$subTotal"}}}]))
        
         shopLen = len(shoppingCart)
@@ -194,7 +193,7 @@ def logged():
     # Get log in info from log in form
     user = request.form["username"].lower()
     pwd = request.form["password"]
-    #pwd = str(sha1(request.form["password"].encode('utf-8')).hexdigest())
+    
     # Make sure form input is not blank and re-render log in page if blank
     if user == "" or pwd == "":
         return render_template ( "login.html" )
@@ -291,11 +290,7 @@ def cart():
     return render_template("cart.html", shoppingCart=shoppingCart, shopLen=shopLen, total=total, totItems=totItems, display=display, session=session)
 
 
-# @app.errorhandler(404)
-# def pageNotFound( e ):
-#     if 'user' in session:
-#         return render_template ( "404.html", session=session )
-#     return render_template ( "404.html" ), 404
+
 
 
 # Only needed if Flask run is not used to execute the server
