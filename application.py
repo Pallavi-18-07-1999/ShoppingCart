@@ -110,7 +110,7 @@ def update():
         
         # Select info of selected shirt from database
         goods=collection.find({"id":id})
-        #goods = db.execute("SELECT * FROM shirts WHERE id = :id", id=id)
+        
         # Extract values from selected shirt record
         # Check if shirt is on sale to determine price
    
