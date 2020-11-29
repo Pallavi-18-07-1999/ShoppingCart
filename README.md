@@ -5,10 +5,15 @@
 
 
 This shopping cart app lets you to perform following operations:
+
 1: add to cart
+
 2: view cart
+
 3: make purchase
+
 4 : view history of your purchases
+
 5: Remove and update an item from your cart.
 
 This shopping cart app is made up using flask. Mongodb is used as the database.
